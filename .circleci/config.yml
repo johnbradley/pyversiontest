@@ -15,6 +15,21 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          key: v1-dependency-cache
+
+      - run:
+          name: install python dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install wheel
+            pip install twine
+      - save_cache:
+          key: v1-dependency-cache
+          paths:
+            - "venv"
+
       - run:
           name: init .pypirc
           command: |
@@ -26,13 +41,13 @@ jobs:
       - run:
           name: create packages
           command: |
-            pip install wheel
+            . venv/bin/activate
             python setup.py bdist_wheel --universal
 
       - run:
           name: upload to pypi
           command: |
-            pip install twine
+            . venv/bin/activate
             twine upload dist/*
 
 workflows:
