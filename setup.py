@@ -1,11 +1,10 @@
 from setuptools import setup
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 
-setup(name='funniest',
+setup(name='pyversiontest',
       version=VERSION,
       description='The funniest joke in the world',
-      long_description='',
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
